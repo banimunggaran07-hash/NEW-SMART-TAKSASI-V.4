@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Semantic Colors */
+  --color-success: #15803D;
+  --color-on-success: #FFFFFF;
+  --color-success-container: #DCFCE7;
+  --color-on-success-container: #14532D;
+
+  --color-warning: #B45309;
+  --color-on-warning: #FFFFFF;
+  --color-warning-container: #FEF3C7;
+  --color-on-warning-container: #78350F;
+
+  /* Dark-adapted semantic containers */
+  --color-dark-success: #4ADE80;
+  --color-dark-success-container: #14532D;
+  --color-dark-on-success-container: #BBF7D0;
+  --color-dark-warning: #FBBF24;
+  --color-dark-warning-container: #78350F;
+  --color-dark-on-warning-container: #FEF3C7;
+
+  /* Light Palette */
+  --color-light-primary: #004D99;
+  --color-light-on-primary: #FFFFFF;
+  --color-light-primary-container: #1565C0;
+  --color-light-on-primary-container: #DAE5FF;
+  --color-light-secondary: #4A5F83;
+  --color-light-on-secondary: #FFFFFF;
+  --color-light-secondary-container: #C0D5FF;
+  --color-light-on-secondary-container: #1B3052;
+  --color-light-tertiary: #813900;
+  --color-light-on-tertiary: #FFFFFF;
+  --color-light-tertiary-container: #FFDECE;
+  --color-light-on-tertiary-container: #532200;
+  --color-light-error: #BA1A1A;
+  --color-light-on-error: #FFFFFF;
+  --color-light-error-container: #FFDAD6;
+  --color-light-on-error-container: #93000A;
+  --color-light-background: #F4F6FA;
+  --color-light-on-background: #191C21;
+  --color-light-surface: #F4F6FA;
+  --color-light-surface-dim: #D8DAE2;
+  --color-light-surface-bright: #FFFFFF;
+  --color-light-surface-container-lowest: #FFFFFF;
+  --color-light-surface-container-low: #F2F3FB;
+  --color-light-surface-container: #ECEDF6;
+  --color-light-surface-container-high: #E7E8F0;
+  --color-light-surface-container-highest: #E1E2EA;
+  --color-light-on-surface: #191C21;
+  --color-light-surface-variant: #DEE2F0;
+  --color-light-on-surface-variant: #424752;
+  --color-light-outline: #727783;
+  --color-light-outline-variant: #C2C6D4;
+  --color-light-inverse-surface: #2E3037;
+  --color-light-inverse-on-surface: #EFF0F9;
+  --color-light-inverse-primary: #A9C7FF;
+
+  /* Dark Palette */
+  --color-dark-primary: #A9C7FF;
+  --color-dark-on-primary: #003063;
+  --color-dark-primary-container: #1565C0;
+  --color-dark-on-primary-container: #DAE5FF;
+  --color-dark-secondary: #B2C7F1;
+  --color-dark-on-secondary: #1B3052;
+  --color-dark-secondary-container: #32476A;
+  --color-dark-on-secondary-container: #D6E3FF;
+  --color-dark-tertiary: #FFB68C;
+  --color-dark-on-tertiary: #532200;
+  --color-dark-tertiary-container: #753400;
+  --color-dark-on-tertiary-container: #FFDECE;
+  --color-dark-error: #FFB4AB;
+  --color-dark-on-error: #690005;
+  --color-dark-error-container: #93000A;
+  --color-dark-on-error-container: #FFDAD6;
+  --color-dark-background: #000000;
+  --color-dark-on-background: #F1F3F9;
+  --color-dark-surface: #000000;
+  --color-dark-surface-dim: #000000;
+  --color-dark-surface-bright: #2A2F3A;
+  --color-dark-surface-container-lowest: #050507;
+  --color-dark-surface-container-low: #0A0B0E;
+  --color-dark-surface-container: #12141A;
+  --color-dark-surface-container-high: #1A1D24;
+  --color-dark-surface-container-highest: #22262F;
+  --color-dark-on-surface: #F1F3F9;
+  --color-dark-surface-variant: #2E333E;
+  --color-dark-on-surface-variant: #B6BCCB;
+  --color-dark-outline: #868C9B;
+  --color-dark-outline-variant: #252932;
+  --color-dark-inverse-surface: #E1E2EA;
+  --color-dark-inverse-on-surface: #111319;
+  --color-dark-inverse-primary: #005DB7;
+
+  /* Typography */
+  --font-display: "Afacad Flux", sans-serif;
+  --font-headline: "Afacad Flux", sans-serif;
+  --font-title: "Commissioner", sans-serif;
+  --font-body: "Commissioner", sans-serif;
+  --font-label: "Commissioner", sans-serif;
+  --font-mono: "Source Code Pro", monospace;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* Spacing Gutters */
+  --spacing-gutter-xs: 4px;
+  --spacing-gutter-sm: 8px;
+  --spacing-gutter-md: 12px;
+  --spacing-gutter-lg: 16px;
+  --spacing-gutter-xl: 24px;
+  --spacing-section: 20px;
+  --spacing-page-margin: 16px;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: contain;
+    touch-action: manipulation;
+  }
+
+  body {
+    font-family: var(--font-body);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+  }
+}
+
+.material-symbols-outlined {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1 !important;
+  box-sizing: content-box;
+  overflow: hidden;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: middle;
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+}
+
+.material-symbols-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Custom typography helper classes matching design tokens */
+.text-display-md {
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
+.text-display-md-mobile {
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: -0.4px;
+  font-weight: 700;
+}
+.text-headline-md {
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+}
+.text-headline-sm {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.15px;
+  font-weight: 700;
+}
+.text-title-md {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0px;
+  font-weight: 600;
+}
+.text-title-sm {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  font-weight: 600;
+}
+.text-body-md {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  font-weight: 400;
+}
+.text-body-sm {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  font-weight: 400;
+}
+.text-label-lg {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  font-weight: 600;
+}
+.text-label-md {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+.text-label-sm {
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+.text-mono-sm {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  font-weight: 600;
+}
+
+/* Tactile raised card & button press feel */
+.tactile-press {
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), background-color 120ms ease-out;
+}
+.tactile-press:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+/* Safe area padding helpers for iOS & Android */
+.pt-safe {
+  padding-top: max(8px, env(safe-area-inset-top));
+}
+.pb-safe-nav {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+.pb-safe-content {
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+}
+
+/* Hide scrollbars cleanly on horizontal chip rails */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,8 @@
+{
+  "name": "SmartTaksasi",
+  "description": "Aplikasi operasional lapangan SmartTaksasi untuk taksasi kendaraan, Booking Quality, pipeline Gform RO, OTR, CLOP, dan target marketing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
