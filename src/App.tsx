@@ -17,6 +17,7 @@ import { KelolaUserScreen } from './components/screens/KelolaUserScreen';
 import { LeaderboardScreen } from './components/screens/LeaderboardScreen';
 import { LoginScreen } from './components/screens/LoginScreen';
 import { PriceListScreen } from './components/screens/PriceListScreen';
+import { ProfileSettingsScreen } from './components/screens/ProfileSettingsScreen';
 import { RiwayatTaksasiScreen } from './components/screens/RiwayatTaksasiScreen';
 import { SettingsScreen } from './components/screens/SettingsScreen';
 import { TaksasiCalculatorScreen } from './components/screens/TaksasiCalculatorScreen';
@@ -62,13 +63,31 @@ export default function App() {
   });
 
   const [serverUrl, setServerUrl] = useState<string>('smarttaksasi.my.id');
-  const [session, setSession] = useState<AuthSession | null>({
-    csId: '68343',
-    name: 'BANI MUNGGARAN',
-    role: 'SUPERVISOR',
-    kiosName: 'PARUNG PANJANG',
-    kiosCode: '15576',
-    serverUrl: 'smarttaksasi.my.id',
+  const [session, setSession] = useState<AuthSession | null>(() => {
+    const base: AuthSession = {
+      csId: '68343',
+      name: 'BANI MUNGGARAN',
+      role: 'SUPERVISOR',
+      kiosName: 'PARUNG PANJANG',
+      kiosCode: '15576',
+      serverUrl: 'smarttaksasi.my.id',
+      phone: '0812-8490-1122',
+      email: 'bani.munggaran07@gmail.com',
+      jabatan: 'Supervisor Kios',
+      alamatKios: 'Jl. Raya Parung Panjang No. 45, Kab. Bogor',
+      bio: 'Fokus penagihan BQ & akuisisi RO Danastra area Bogor Barat.',
+      notifPenagihan: true,
+      showWaOnShare: true,
+    };
+    try {
+      const savedProfile = localStorage.getItem('smarttaksasi_profile_v1');
+      if (savedProfile) {
+        return { ...base, ...JSON.parse(savedProfile) };
+      }
+    } catch {
+      // ignore storage errors
+    }
+    return base;
   });
 
   const [history, setHistory] = useState<ScreenId[]>(['dashboard']);
@@ -476,6 +495,49 @@ export default function App() {
                   setSession((s) => (s ? { ...s, serverUrl: url } : s));
                 }}
                 onBack={goBack}
+                onToast={showToast}
+              />
+            )}
+
+            {activeScreen === 'profil' && (
+              <ProfileSettingsScreen
+                session={session}
+                onUpdateProfile={(updates) => {
+                  setSession((prev) => {
+                    if (!prev) return prev;
+                    const updated = { ...prev, ...updates };
+                    try {
+                      localStorage.setItem(
+                        'smarttaksasi_profile_v1',
+                        JSON.stringify(updated)
+                      );
+                    } catch {
+                      // ignore storage quota errors
+                    }
+                    return updated;
+                  });
+                  if (updates.name || updates.kiosName) {
+                    setUsers((prev) =>
+                      prev.map((u) =>
+                        u.csId === session.csId
+                          ? {
+                              ...u,
+                              name: updates.name || u.name,
+                              kiosName: updates.kiosName || u.kiosName,
+                              kiosCode: updates.kiosCode || u.kiosCode,
+                            }
+                          : u
+                      )
+                    );
+                  }
+                  appendLog(
+                    'Ubah Status',
+                    `PATCH /api/profile/${session.csId}`,
+                    'Memperbarui pengaturan profil pengguna'
+                  );
+                }}
+                onBack={goBack}
+                onOpenSecuritySettings={() => navigate('pengaturan')}
                 onToast={showToast}
               />
             )}

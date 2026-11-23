@@ -239,6 +239,17 @@ export const AppShell: React.FC<AppShellProps> = ({
                         type="button"
                         onClick={() => {
                           setMoreMenuOpen(false);
+                          onNavigate('profil');
+                        }}
+                        className="w-full min-h-[40px] px-3 py-2 rounded-lg flex items-center gap-2.5 text-left font-label text-label-md text-light-on-surface dark:text-dark-on-surface hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container"
+                      >
+                        <Icon name="account_circle" size={18} className="text-light-primary dark:text-dark-primary" />
+                        <span>Pengaturan Profil</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMoreMenuOpen(false);
                           onNavigate('pengaturan');
                         }}
                         className="w-full min-h-[40px] px-3 py-2 rounded-lg flex items-center gap-2.5 text-left font-label text-label-md text-light-on-surface dark:text-dark-on-surface hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container"

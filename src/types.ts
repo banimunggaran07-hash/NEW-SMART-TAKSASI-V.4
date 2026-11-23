@@ -12,6 +12,7 @@ export type ScreenId =
   | 'kelola-user'
   | 'log-aktivitas'
   | 'pengaturan'
+  | 'profil'
   | 'donate'
   | 'upload-master'
   | 'rekap-harian';
@@ -169,4 +170,12 @@ export interface AuthSession {
   kiosName: string;
   kiosCode: string;
   serverUrl: string;
+  avatarUrl?: string;
+  phone?: string;
+  email?: string;
+  jabatan?: string;
+  alamatKios?: string;
+  bio?: string;
+  notifPenagihan?: boolean;
+  showWaOnShare?: boolean;
 }

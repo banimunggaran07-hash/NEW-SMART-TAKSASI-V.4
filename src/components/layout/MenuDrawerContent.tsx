@@ -100,6 +100,12 @@ export const MenuDrawerContent: React.FC<MenuDrawerContentProps> = ({
         section: 'admin',
       },
       {
+        id: 'profil',
+        label: 'Pengaturan Profil',
+        icon: 'account_circle',
+        section: 'admin',
+      },
+      {
         id: 'pengaturan',
         label: 'Pengaturan Server & PIN',
         icon: 'settings',
@@ -353,21 +359,35 @@ export const MenuDrawerContent: React.FC<MenuDrawerContentProps> = ({
           </button>
         </div>
 
-        {/* User Footer Card */}
-        <div className="rounded-md bg-light-surface-container-low dark:bg-dark-surface-container border border-light-outline-variant dark:border-dark-outline-variant border-b-2 shadow-sm p-2.5 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-9 h-9 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary flex items-center justify-center font-title text-title-sm shrink-0">
-              {initials}
+        {/* User Footer Card (clickable to open Pengaturan Profil) */}
+        <div className="rounded-md bg-light-surface-container-low dark:bg-dark-surface-container border border-light-outline-variant dark:border-dark-outline-variant border-b-2 shadow-sm p-2 flex items-center justify-between gap-2">
+          <button
+            type="button"
+            onClick={() => handleSelect('profil')}
+            className="flex-1 flex items-center gap-2.5 min-w-0 text-left rounded-md p-1 hover:bg-light-surface-container dark:hover:bg-dark-surface-container-high transition-colors tactile-press"
+            title="Buka Pengaturan Profil"
+          >
+            <div className="w-10 h-10 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary flex items-center justify-center font-title text-title-sm shrink-0 overflow-hidden border border-light-outline-variant dark:border-dark-outline-variant">
+              {session.avatarUrl ? (
+                <img
+                  src={session.avatarUrl}
+                  alt={session.name}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                initials
+              )}
             </div>
             <div className="flex flex-col min-w-0">
               <span className="font-label text-label-lg text-light-on-surface dark:text-dark-on-surface truncate">
                 {session.name}
               </span>
               <span className="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate">
-                KIOS {session.kiosName}
+                {session.phone ? session.phone : `KIOS ${session.kiosName}`}
               </span>
             </div>
-          </div>
+          </button>
           <button
             type="button"
             onClick={onLogout}
